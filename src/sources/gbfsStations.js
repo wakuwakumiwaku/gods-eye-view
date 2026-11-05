@@ -118,7 +118,10 @@ export function parseStationStatus(payload) {
     const stationId = String(raw?.station_id ?? raw?.id ?? '').trim();
     if (!stationId) continue;
 
-    const bikes = toNonNegativeInteger(raw?.num_bikes_available);
+    // GBFS v3 renamed num_bikes_available to num_vehicles_available.
+    const bikes = toNonNegativeInteger(
+      raw?.num_vehicles_available ?? raw?.num_bikes_available,
+    );
     const docks = toNonNegativeInteger(raw?.num_docks_available);
     statusMap.set(stationId, {
       stationId,
