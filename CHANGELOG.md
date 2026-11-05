@@ -1,5 +1,7 @@
 # Changelog
 
+- FIRMS detections with nonexistent calendar dates are excluded from the recent-fire window instead of rolling into the next month.
+
 - Snow flakes sway within a fixed range instead of drifting sideways faster the
   longer the app runs; the Wind setting still scales the sway.
 

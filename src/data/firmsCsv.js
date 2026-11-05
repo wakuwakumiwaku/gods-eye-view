@@ -163,7 +163,18 @@ export function acquisitionMsUtc(acqDate, acqTime) {
     minutes > 59
   )
     return NaN;
-  return Date.UTC(year, month - 1, day, hours, minutes);
+  // Date normalizes impossible days into the following month. Reject that
+  // rollover instead of admitting a malformed observation into the live window.
+  const date = new Date(0);
+  date.setUTCFullYear(year, month - 1, day);
+  date.setUTCHours(hours, minutes, 0, 0);
+  if (
+    date.getUTCFullYear() !== year ||
+    date.getUTCMonth() !== month - 1 ||
+    date.getUTCDate() !== day
+  )
+    return NaN;
+  return date.getTime();
 }
 
 /**

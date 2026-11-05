@@ -1435,6 +1435,8 @@ accessible name remains "Don't show this again". Control behavior is unchanged.
 
 ## FIRMS source status
 
+Acquisition timestamps reject nonexistent calendar dates, including invalid leap days, before trailing-24-hour filtering. Valid leap days and unpadded UTC times retain their existing meaning.
+
 FIRMS ingestion and adaptation require explicit finite coordinates within WGS84 ranges; genuine zero coordinates remain valid and admitted detection indices stay sequential.
 
 The FIRMS proxy records source success after appending its rows. If aggregation
